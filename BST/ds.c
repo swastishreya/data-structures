@@ -72,3 +72,18 @@ int heightBST(node* root){
         return heightBST(root->right)+1;
     }
 }
+
+node* searchKeyBST(node* root,int key){
+    if(root==NULL){
+        return NULL;
+    }
+    else if(root->data==key){
+        return root;
+    }
+    else if(key<=root->data){
+        searchKeyBST(root->left,key);
+    }
+    else{
+        searchKeyBST(root->right,key);
+    }
+}

@@ -13,4 +13,5 @@ void inOrderTraversal(node* root);
 node* insertNode(node* root, int data);
 node* newBst(int data);
 int heightBST(node* root);
+node* searchKeyBST(node* root,int key);
 #endif
