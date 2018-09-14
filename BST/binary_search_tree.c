@@ -27,8 +27,28 @@ void preOrderTraversal(node* root){
     printf("%d ",root->data);
     preOrderTraversal(root->left);
     preOrderTraversal(root->right);
-
 }
+// postOrderTraversal is a recursive function that helps in post-order traversal of 
+// a binary search tree
+void postOrderTraversal(node* root){
+    if(root==NULL){
+        return;
+    }
+    postOrderTraversal(root->left);
+    postOrderTraversal(root->right);
+    printf("%d ",root->data);
+}
+// inOrderTraversal is a recursive function that helps in in-order traversal of 
+// a binary search tree
+void inOrderTraversal(node* root){
+    if(root==NULL){
+        return;
+    }
+    inOrderTraversal(root->left);
+    printf("%d ",root->data);
+    inOrderTraversal(root->right);
+}
+// insertNode funtion inserts a node to binary search tree
 node* insertNode(node* root, int data){
     if(root==NULL){
         root=getNode(data);
@@ -41,12 +61,14 @@ node* insertNode(node* root, int data){
     }
     return root;
 }
+// newBST is a wrapper funtion that helps to create a instance of binary search tree
 node* newBst(int data){
     node* root=NULL;
     root=insertNode(root,data);
     return root;
 }
 
+// Driver program to run the BST
 int main()
 {
     node* bst;
@@ -62,8 +84,14 @@ int main()
         // Push more data to binary search tree
         insertNode(bst,data);
     }
-    
+    printf("Pre-order traversal of BST:\n");
     preOrderTraversal(bst);
+    printf("\n");
+    printf("Post-order traversal of BST\n");
+    postOrderTraversal(bst);
+    printf("\n");
+    printf("In-order traversal of BST\n");
+    inOrderTraversal(bst);
     printf("\n");
     return 0;
 }
