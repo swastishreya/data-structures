@@ -61,11 +61,23 @@ node* insertNode(node* root, int data){
     }
     return root;
 }
+
 // newBST is a wrapper funtion that helps to create a instance of binary search tree
 node* newBst(int data){
     node* root=NULL;
     root=insertNode(root,data);
     return root;
+}
+int heightBST(node* root){
+    if(root==NULL){
+        return -1;
+    }
+    else if(heightBST(root->left)>=heightBST(root->right)){
+        return heightBST(root->left)+1;
+    }
+    else{
+        return heightBST(root->right)+1;
+    }
 }
 
 // Driver program to run the BST
@@ -92,6 +104,8 @@ int main()
     printf("\n");
     printf("In-order traversal of BST\n");
     inOrderTraversal(bst);
+    printf("\n");
+    printf("Height of BST:%d",heightBST(bst)+1);
     printf("\n");
     return 0;
 }
