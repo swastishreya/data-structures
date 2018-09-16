@@ -33,7 +33,8 @@ node* deleteNodeBST(node* root,int key);
 void levelOrderTraversalBST(node* root);
 // Vertical order traversal of BST
 void verticalOrderTraversalBST(node* root);
+// Check if a given binary tree is BST or not.
+int isBST(node* root);
 // TO-DO
 // Top view of a BST
-// Check if a given binary tree is BST or not.
 #endif
