@@ -137,3 +137,25 @@ node* deleteNodeBST(node* root,int key){
     }
     return root;
 }
+// printLevelNodeBST will print all the nodes from left to right in a BST
+// for a given level
+void printLevelNodeBST(int level,node* root){
+    if (root==NULL) return;
+    if(level==1){
+        printf("%d ",root->data);
+        return;
+    }
+
+    else{
+        printLevelNodeBST(level-1,root->left);
+        printLevelNodeBST(level-1,root->right);
+    }
+}
+// levelOrderTraversalBST will do a level order traversal of a binary search tree.
+void levelOrderTraversalBST(node* root){
+    int bstHeight=heightBST(root);
+    bstHeight++;
+    for(int i=1;i<=bstHeight;i++){
+        printLevelNodeBST(i,root);
+    }
+}
