@@ -2,9 +2,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 // getNode function creates a node for the binary search tree
-node* getNode(int data){
-    node* newNode;
-    newNode=(node*)malloc(sizeof(node));
+nodeBST* getNodeBST(int data){
+    nodeBST* newNode;
+    newNode=(nodeBST*)malloc(sizeof(nodeBST));
     newNode->data=data;
     newNode->left=NULL;
     newNode->right=NULL;
@@ -13,55 +13,55 @@ node* getNode(int data){
 
 // preOrderTraversal is a recursive function that helps in pre-order traversal of 
 // a binary search tree
-void preOrderTraversal(node* root){
+void preOrderTraversalBST(nodeBST* root){
     if(root==NULL){
         return;
     }
     printf("%d ",root->data);
-    preOrderTraversal(root->left);
-    preOrderTraversal(root->right);
+    preOrderTraversalBST(root->left);
+    preOrderTraversalBST(root->right);
 }
 // postOrderTraversal is a recursive function that helps in post-order traversal of 
 // a binary search tree
-void postOrderTraversal(node* root){
+void postOrderTraversalBST(nodeBST* root){
     if(root==NULL){
         return;
     }
-    postOrderTraversal(root->left);
-    postOrderTraversal(root->right);
+    postOrderTraversalBST(root->left);
+    postOrderTraversalBST(root->right);
     printf("%d ",root->data);
 }
 // inOrderTraversal is a recursive function that helps in in-order traversal of 
 // a binary search tree
-void inOrderTraversal(node* root){
+void inOrderTraversalBST(nodeBST* root){
     if(root==NULL){
         return;
     }
-    inOrderTraversal(root->left);
+    inOrderTraversalBST(root->left);
     printf("%d ",root->data);
-    inOrderTraversal(root->right);
+    inOrderTraversalBST(root->right);
 }
 // insertNode funtion inserts a node to binary search tree
-node* insertNode(node* root, int data){
+nodeBST* insertNodeBST(nodeBST* root, int data){
     if(root==NULL){
-        root=getNode(data);
+        root=getNodeBST(data);
     }
     else if(data<=root->data){
-        root->left=insertNode(root->left,data);
+        root->left=insertNodeBST(root->left,data);
     }
     else{
-        root->right=insertNode(root->right,data);
+        root->right=insertNodeBST(root->right,data);
     }
     return root;
 }
 
 // newBST is a wrapper funtion that helps to create a instance of binary search tree
-node* newBst(int data){
-    node* root=NULL;
-    root=insertNode(root,data);
+nodeBST* newBST(int data){
+    nodeBST* root=NULL;
+    root=insertNodeBST(root,data);
     return root;
 }
-int heightBST(node* root){
+int heightBST(nodeBST* root){
     if(root==NULL){
         return -1;
     }
@@ -75,7 +75,7 @@ int heightBST(node* root){
 // searchKeyBST function will search for a key in the binary search tree
 // and return the pointer to it.
 // If not found the function will return a null pointer.
-node* searchKeyBST(node* root,int key){
+nodeBST* searchKeyBST(nodeBST* root,int key){
     if(root==NULL){
         return NULL;
     }
@@ -91,8 +91,8 @@ node* searchKeyBST(node* root,int key){
 }
 
 // minNodeBST will return a pointer to node whose data is smallest in the BST
-node* minNodeBST(node* root){
-   node* currentNode=root;
+nodeBST* minNodeBST(nodeBST* root){
+   nodeBST* currentNode=root;
    if(currentNode==NULL) return currentNode;
    while(currentNode->left!=NULL){
        currentNode=currentNode->left;
@@ -101,8 +101,8 @@ node* minNodeBST(node* root){
 }
 
 // maxNodeBST will return a pointer to node whose data is largest in the BST
-node* maxNodeBST(node* root){
-   node* currentNode=root;
+nodeBST* maxNodeBST(nodeBST* root){
+   nodeBST* currentNode=root;
    if(currentNode==NULL) return currentNode;
    while(currentNode->right!=NULL){
        currentNode=currentNode->right;
@@ -110,7 +110,7 @@ node* maxNodeBST(node* root){
    return currentNode;
 }
 
-node* deleteNodeBST(node* root,int key){
+nodeBST* deleteNodeBST(nodeBST* root,int key){
     if(root==NULL) return root;
     if(key<root->data){
         root->left=deleteNodeBST(root->left,key);
@@ -121,17 +121,17 @@ node* deleteNodeBST(node* root,int key){
     else{
         // If the node to be deleted is leaf node or have one child.
         if(root->left==NULL){
-            node* temp=root->right;
+            nodeBST* temp=root->right;
             free(root);
             return temp;
         }
         if(root->right==NULL){
-            node* temp=root->left;
+            nodeBST* temp=root->left;
             free(root);
             return temp;
         }
         // If the node to be deleted has two children
-        node* temp = minNodeBST(root->right);
+        nodeBST* temp = minNodeBST(root->right);
         root->data = temp->data;
         root->right=deleteNodeBST(root->right,temp->data);
     }
@@ -139,7 +139,7 @@ node* deleteNodeBST(node* root,int key){
 }
 // printLevelNodeBST will print all the nodes from left to right in a BST
 // for a given level
-void printLevelNodeBST(int level,node* root){
+void printLevelNodeBST(int level,nodeBST* root){
     if (root==NULL) return;
     if(level==1){
         printf("%d ",root->data);
@@ -152,14 +152,14 @@ void printLevelNodeBST(int level,node* root){
     }
 }
 // levelOrderTraversalBST will do a level order traversal of a binary search tree.
-void levelOrderTraversalBST(node* root){
+void levelOrderTraversalBST(nodeBST* root){
     int bstHeight=heightBST(root);
     bstHeight++;
     for(int i=1;i<=bstHeight;i++){
         printLevelNodeBST(i,root);
     }
 }
-void getMinMax(node* root, int* leftMin,int* rightMax,int horizontal_distance){
+void getMinMax(nodeBST* root, int* leftMin,int* rightMax,int horizontal_distance){
     if(root==NULL) return;
     if(horizontal_distance<*leftMin){
         *leftMin=horizontal_distance;
@@ -170,7 +170,7 @@ void getMinMax(node* root, int* leftMin,int* rightMax,int horizontal_distance){
     getMinMax(root->left,leftMin,rightMax,horizontal_distance-1);
     getMinMax(root->right,leftMin,rightMax,horizontal_distance+1);
 }
-void printVertical(node* root,int i,int horizontal_distance){
+void printVertical(nodeBST* root,int i,int horizontal_distance){
     if(root==NULL) return;
     if(horizontal_distance==i){
         printf("%d ",root->data);
@@ -178,14 +178,14 @@ void printVertical(node* root,int i,int horizontal_distance){
     printVertical(root->left,i,horizontal_distance-1);
     printVertical(root->right,i,horizontal_distance+1);
 }
-void verticalOrderTraversalBST(node* root){
+void verticalOrderTraversalBST(nodeBST* root){
     int leftMin=0, rightMax=0, horizontal_distance=0;
     getMinMax(root,&leftMin,&rightMax,horizontal_distance);
     for(int i=leftMin;i<=rightMax;i++){
         printVertical(root,i,horizontal_distance);
     }
 }
-int isBST(node* root){
+int isBST(nodeBST* root){
     if(root==NULL) return 1;
     if( (root->left!=NULL) && (maxNodeBST(root->left)->data>=root->data) ){
         return 0;

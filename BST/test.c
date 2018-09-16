@@ -4,23 +4,23 @@
 // Driver program to run the BST
 int main()
 {
-    node* bst;
-    node* ptr;
+    nodeBST* bst;
+    nodeBST* ptr;
     int data,nodeLimit,loopIterator;
     printf("Enter the root node value to create a BST instance\n");
     scanf("%d",&data);
     // Create an instance of binary search tree
-    bst=newBst(data);
+    bst=newBST(data);
     printf("How many more nodes you want to enter in BST?\n");
     scanf("%d",&nodeLimit);
     for(loopIterator=0;loopIterator<nodeLimit;loopIterator++){
         scanf("%d",&data);
         // Push more data to binary search tree
-        insertNode(bst,data);
+        insertNodeBST(bst,data);
     }
     /* Write Code here to test the various funtions for BST */
     printf("Print in order traversal\n");
-    inOrderTraversal(bst);
+    inOrderTraversalBST(bst);
     printf("\n");
     printf("%d ",isBST(bst));
     /*                                                      */
