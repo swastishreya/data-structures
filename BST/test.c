@@ -1,4 +1,4 @@
-#include "ds.h"
+#include "bst.h"
 #include<stdio.h>
 #include<stdlib.h>
 // Driver program to run the BST
@@ -19,7 +19,10 @@ int main()
         insertNode(bst,data);
     }
     /* Write Code here to test the various funtions for BST */
-
+    printf("Print in order traversal\n");
+    inOrderTraversal(bst);
+    printf("\n");
+    printf("%d ",isBST(bst));
     /*                                                      */
     return 0;
 }

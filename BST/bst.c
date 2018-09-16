@@ -1,4 +1,4 @@
-#include "ds.h"
+#include "bst.h"
 #include<stdio.h>
 #include<stdlib.h>
 // getNode function creates a node for the binary search tree
@@ -183,5 +183,20 @@ void verticalOrderTraversalBST(node* root){
     getMinMax(root,&leftMin,&rightMax,horizontal_distance);
     for(int i=leftMin;i<=rightMax;i++){
         printVertical(root,i,horizontal_distance);
+    }
+}
+int isBST(node* root){
+    if(root==NULL) return 1;
+    if( (root->left!=NULL) && (maxNodeBST(root->left)->data>=root->data) ){
+        return 0;
+    }
+    if( (root->right!=NULL) && (minNodeBST(root->right)->data<=root->data) ){
+        return 0;
+    }
+    if(!isBST(root->left) || !isBST(root->right)){
+        return 0;
+    }
+    else{
+        return 1;
     }
 }
