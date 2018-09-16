@@ -159,3 +159,29 @@ void levelOrderTraversalBST(node* root){
         printLevelNodeBST(i,root);
     }
 }
+void getMinMax(node* root, int* leftMin,int* rightMax,int horizontal_distance){
+    if(root==NULL) return;
+    if(horizontal_distance<*leftMin){
+        *leftMin=horizontal_distance;
+    }
+    else if(horizontal_distance>*rightMax){
+        *rightMax=horizontal_distance;
+    }
+    getMinMax(root->left,leftMin,rightMax,horizontal_distance-1);
+    getMinMax(root->right,leftMin,rightMax,horizontal_distance+1);
+}
+void printVertical(node* root,int i,int horizontal_distance){
+    if(root==NULL) return;
+    if(horizontal_distance==i){
+        printf("%d ",root->data);
+    }
+    printVertical(root->left,i,horizontal_distance-1);
+    printVertical(root->right,i,horizontal_distance+1);
+}
+void verticalOrderTraversalBST(node* root){
+    int leftMin=0, rightMax=0, horizontal_distance=0;
+    getMinMax(root,&leftMin,&rightMax,horizontal_distance);
+    for(int i=leftMin;i<=rightMax;i++){
+        printVertical(root,i,horizontal_distance);
+    }
+}

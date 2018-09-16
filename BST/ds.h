@@ -29,10 +29,11 @@ node* maxNodeBST(node* root);
 node* searchKeyBST(node* root,int key);
 // Function to delete a key from BST
 node* deleteNodeBST(node* root,int key);
-// TO-DO
 // Level order traversal of a BST
 void levelOrderTraversalBST(node* root);
 // Vertical order traversal of BST
+void verticalOrderTraversalBST(node* root);
+// TO-DO
 // Top view of a BST
 // Check if a given binary tree is BST or not.
 #endif
