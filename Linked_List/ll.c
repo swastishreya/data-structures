@@ -31,6 +31,18 @@ nodeLL* insertNodeAtBegLL(nodeLL* head, int data){
     }
     return head;
 }
+nodeLL* newLL(int data){
+    nodeLL* newLL=NULL;
+    newLL=insertNodeAtEndLL(newLL,data);
+}
+nodeLL* deleteNodeAtBegLL(nodeLL* head){
+    if(head==NULL) return head;
+    nodeLL* begNode=head;
+    head=head->link;
+    begNode->link=NULL;
+    free(begNode);
+    return head;
+}
 void displayLL(nodeLL* head){
     nodeLL* traversePtr=head;
     while(traversePtr!=NULL){
