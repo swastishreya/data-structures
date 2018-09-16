@@ -72,7 +72,9 @@ int heightBST(node* root){
         return heightBST(root->right)+1;
     }
 }
-
+// searchKeyBST function will search for a key in the binary search tree
+// and return the pointer to it.
+// If not found the function will return a null pointer.
 node* searchKeyBST(node* root,int key){
     if(root==NULL){
         return NULL;
@@ -80,10 +82,58 @@ node* searchKeyBST(node* root,int key){
     else if(root->data==key){
         return root;
     }
-    else if(key<=root->data){
+    else if(key<root->data){
         searchKeyBST(root->left,key);
     }
     else{
         searchKeyBST(root->right,key);
     }
+}
+
+// minNodeBST will return a pointer to node whose data is smallest in the BST
+node* minNodeBST(node* root){
+   node* currentNode=root;
+   if(currentNode==NULL) return currentNode;
+   while(currentNode->left!=NULL){
+       currentNode=currentNode->left;
+   }
+   return currentNode;
+}
+
+// maxNodeBST will return a pointer to node whose data is largest in the BST
+node* maxNodeBST(node* root){
+   node* currentNode=root;
+   if(currentNode==NULL) return currentNode;
+   while(currentNode->right!=NULL){
+       currentNode=currentNode->right;
+   }
+   return currentNode;
+}
+
+node* deleteNodeBST(node* root,int key){
+    if(root==NULL) return root;
+    if(key<root->data){
+        root->left=deleteNodeBST(root->left,key);
+    }
+    else if(key>root->data){
+        root->right=deleteNodeBST(root->right,key);
+    }
+    else{
+        // If the node to be deleted is leaf node or have one child.
+        if(root->left==NULL){
+            node* temp=root->right;
+            free(root);
+            return temp;
+        }
+        if(root->right==NULL){
+            node* temp=root->left;
+            free(root);
+            return temp;
+        }
+        // If the node to be deleted has two children
+        node* temp = minNodeBST(root->right);
+        root->data = temp->data;
+        root->right=deleteNodeBST(root->right,temp->data);
+    }
+    return root;
 }
