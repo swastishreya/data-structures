@@ -1,9 +1,11 @@
 #include "ds.h"
 #include<stdio.h>
+#include<stdlib.h>
 // Driver program to run the BST
 int main()
 {
     node* bst;
+    node* ptr;
     int data,nodeLimit,loopIterator;
     printf("Enter the root node value to create a BST instance\n");
     scanf("%d",&data);
@@ -16,16 +18,8 @@ int main()
         // Push more data to binary search tree
         insertNode(bst,data);
     }
-    printf("Pre-order traversal of BST:\n");
-    preOrderTraversal(bst);
-    printf("\n");
-    printf("Post-order traversal of BST\n");
-    postOrderTraversal(bst);
-    printf("\n");
-    printf("In-order traversal of BST\n");
-    inOrderTraversal(bst);
-    printf("\n");
-    printf("Height of BST:%d",heightBST(bst)+1);
-    printf("\n");
+    /* Write Code here to test the various funtions for BST */
+
+    /*                                                      */
     return 0;
 }
