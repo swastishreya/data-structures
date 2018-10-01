@@ -185,6 +185,7 @@ void verticalOrderTraversalBST(nodeBST* root){
         printVertical(root,i,horizontal_distance);
     }
 }
+// isBST tells whether a given binary tree is binary search tree or not. 
 int isBST(nodeBST* root){
     if(root==NULL) return 1;
     if( (root->left!=NULL) && (maxNodeBST(root->left)->data>=root->data) ){
@@ -199,4 +200,11 @@ int isBST(nodeBST* root){
     else{
         return 1;
     }
+}
+// deleteBST deletes the entire binary search tree.
+nodeBST* deleteBST(nodeBST* root){
+    if(root==NULL) return root;
+    deleteBST(root->left);
+    deleteBST(root->right);
+    free(root);
 }
