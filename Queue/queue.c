@@ -1,47 +1,59 @@
 // Linked list implementation of stack
 #include "queue.h"
-#include "../Linked_List/ll.c"
 #include<stdio.h>
 #include<stdlib.h>
-// Create a new node for the queue
-nodeQueue* newNodeQueue(int data){
-    nodeQueue* newNode=(nodeQueue*)malloc(sizeof(nodeQueue));
-    newNode->data=data;
-    newNode->link=NULL;
-    return newNode;
-}
-// Create a new instance of queue
-queue* newQueue(){
-    queue* queueObject=(queue*)malloc(sizeof(queue));
-    queueObject->front=queueObject->rear=NULL;
-    return queueObject;
+#include <string.h>
+void newQueue(queue *q, size_t memSize)
+{
+   q->queue_size = 0;
+   q->memSize = memSize;
+   q->front = q->rear = NULL;
 }
 
-nodeQueue* enqueue(queue* q,int data){
-    nodeQueue* newNode=newNodeQueue(data);
-    if(q->rear==NULL){
-       q->rear=q->front=newNode;
-    }
-    q->rear->link=newNode;
-    q->rear=newNode;
-    return newNode;
-}
+int enqueue(queue *q, const void *data)
+{
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->data = malloc(q->memSize);
+    newNode->next = NULL;
+    memcpy(newNode->data, data, q->memSize);
 
-void dequeue(queue* q){
-    if(q->front==NULL) return;
-    nodeQueue* temp=q->front;
-    q->front=q->front->link;
-    if(q->front==NULL)
+    if(q->queue_size == 0)
     {
-        q->rear=NULL;
+        q->front = q->rear = newNode;
     }
-    free(temp);
+    else
+    {
+        q->rear->next = newNode;
+        q->rear = newNode;
+    }
+    q->queue_size++;
+    return 0;
 }
-
-void traverseQueue(queue* q){
-    nodeQueue* frontP=q->front;
-    while(frontP!=NULL){
-        printf("%d ",frontP->data);
-        frontP=frontP->link;
+void dequeue(queue *q, void *data)
+{
+    if(q->queue_size > 0)
+    {
+        node *temp = q->front;
+        memcpy(data, temp->data, q->memSize);
+        if(q->queue_size > 1)
+        {
+            q->front = q->front->next;
+        }
+        else
+        {
+            q->front = NULL;
+            q->rear = NULL;
+        }
+        q->queue_size--;
+        free(temp->data);
+        free(temp);
+    }
+}
+void peekQueue(queue *q, void *data)
+{
+    if(q->queue_size > 0)
+    {
+       node *temp = q->front;
+       memcpy(data, temp->data, q->memSize);
     }
 }
