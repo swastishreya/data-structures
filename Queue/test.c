@@ -26,7 +26,7 @@ int main()
 
      f=9;
      enqueue(&myqueue, &f);
-
+     printf("Queue length is :%d\n",getQueueLength(&myqueue));
      peekQueue(&myqueue, &peekVal);
      printf("The value that is at the front of the queue is %d\n\n", peekVal);
      while(myqueue.front!=NULL){
