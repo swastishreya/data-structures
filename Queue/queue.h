@@ -19,4 +19,5 @@ void newQueue(queue *q, size_t memSize);
 int enqueue(queue *, const void *);
 void dequeue(queue *, void *);
 void peekQueue(queue *, void *);
+int getQueueLength(queue *);
 #endif

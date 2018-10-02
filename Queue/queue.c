@@ -57,3 +57,7 @@ void peekQueue(queue *q, void *data)
        memcpy(data, temp->data, q->memSize);
     }
 }
+int getQueueLength(queue *q)
+{
+    return q->queue_size;
+}
